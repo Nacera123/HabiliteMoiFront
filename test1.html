@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organigramme Pyramidal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #0891b2;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light-bg: #f1f5f9;
+            --card-radius: 16px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+            --connector-color: #cbd5e1;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light-bg);
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 50%, var(--secondary) 100%);
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -5%;
+            width: 350px;
+            height: 350px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+        .page-header h1 {
+            color: white;
+            font-weight: 700;
+            font-size: 1.6rem;
+        }
+        .page-header p {
+            color: rgba(255,255,255,0.75);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        /* ===== ORGANIGRAMME ===== */
+        .org-tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 1rem 4rem;
+        }
+
+        /* ===== CONNECTEURS ===== */
+        .connector-down {
+            width: 2px;
+            height: 32px;
+            background: var(--connector-color);
+            margin: 0 auto;
+        }
+
+        .connector-split {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            padding-top: 2rem;
+            gap: 1.5rem;
+        }
+
+        .connector-split::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 1rem;
+            background: var(--connector-color);
+        }
+
+        .connector-split::after {
+            content: '';
+            position: absolute;
+            top: 1rem;
+            height: 2px;
+            background: var(--connector-color);
+        }
+
+        .split-3::after {
+            width: calc((170px + 1.5rem) * 2);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .split-4::after {
+            width: calc((170px + 1.5rem) * 3);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .split-5::after {
+            width: calc((150px + 1.5rem) * 4);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .child-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 1rem;
+            position: relative;
+        }
+
+        .child-node::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 1rem;
+            background: var(--connector-color);
+        }
+
+        /* ===== CARDS ===== */
+        .org-card {
+            background: white;
+            border-radius: var(--card-radius);
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+            width: 170px;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .org-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .org-card .avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            margin: 0 auto 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+        }
+
+        .org-card .name {
+            font-weight: 600;
+            font-size: 0.82rem;
+            color: var(--dark);
+            margin-bottom: 0.15rem;
+        }
+
+        .org-card .role {
+            font-size: 0.7rem;
+            color: var(--gray);
+        }
+
+        .org-card .badge-dept {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.2rem 0.55rem;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            font-weight: 500;
+        }
+
+        /* Niveaux */
+        .level-1 .avatar { background: linear-gradient(135deg, #4f46e5, #7c3aed); }
+        .level-1 .org-card { border-top: 3px solid var(--primary); }
+        .level-1 .badge-dept { background: rgba(79,70,229,0.08); color: var(--primary); }
+
+        .level-2 .avatar { background: linear-gradient(135deg, #0891b2, #06b6d4); }
+        .level-2 .org-card { border-top: 3px solid var(--secondary); }
+        .level-2 .badge-dept { background: rgba(8,145,178,0.08); color: var(--secondary); }
+
+        .level-3 .avatar { background: linear-gradient(135deg, #f59e0b, #f97316); }
+        .level-3 .org-card { border-top: 3px solid var(--accent); }
+        .level-3 .badge-dept { background: rgba(245,158,11,0.08); color: #b45309; }
+
+        .level-4 .avatar { background: linear-gradient(135deg, #10b981, #34d399); }
+        .level-4 .org-card { border-top: 3px solid var(--success); }
+        .level-4 .badge-dept { background: rgba(16,185,129,0.08); color: #047857; }
+
+        /* Status dot */
+        .status-dot {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 0 2px white, 0 0 0 3px rgba(16,185,129,0.25);
+        }
+
+        /* Légende */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+            padding: 0.85rem 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.72rem;
+            color: var(--gray);
+        }
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .org-card { animation: fadeIn 0.4s ease forwards; }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .connector-split { flex-wrap: wrap; gap: 1rem; }
+            .connector-split::after { display: none; }
+            .child-node::before { display: none; }
+            .org-card { width: 150px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1><i class="bi bi-diagram-3 me-2"></i>Organigramme</h1>
+            <p>Structure organisationnelle</p>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="org-tree">
+
+            <!-- NIVEAU 1 : CEO -->
+            <div class="level-1">
+                <div class="org-card">
+                    <span class="status-dot"></span>
+                    <div class="avatar"><i class="bi bi-person-fill"></i></div>
+                    <div class="name">Jean Dupont</div>
+                    <div class="role">Directeur Général</div>
+                    <span class="badge-dept">Direction</span>
+                </div>
+            </div>
+
+            <!-- Connecteur vertical -->
+            <div class="connector-down"></div>
+
+            <!-- NIVEAU 2 : Directeurs (3) -->
+            <div class="connector-split split-3 level-2">
+                <div class="child-node">
+                    <div class="org-card">
+                        <span class="status-dot"></span>
+                        <div class="avatar"><i class="bi bi-cpu"></i></div>
+                        <div class="name">Marie Martin</div>
+                        <div class="role">Directrice Technique</div>
+                        <span class="badge-dept">Tech</span>
+                    </div>
+                </div>
+                <div class="child-node">
+                    <div class="org-card">
+                        <span class="status-dot"></span>
+                        <div class="avatar"><i class="bi bi-graph-up-arrow"></i></div>
+                        <div class="name">Pierre Leroy</div>
+                        <div class="role">Directeur Commercial</div>
+                        <span class="badge-dept">Business</span>
+                    </div>
+                </div>
+                <div class="child-node">
+                    <div class="org-card">
+                        <span class="status-dot"></span>
+                        <div class="avatar"><i class="bi bi-people"></i></div>
+                        <div class="name">Sophie Bernard</div>
+                        <div class="role">Directrice RH</div>
+                        <span class="badge-dept">RH</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connecteur vertical -->
+            <div class="connector-down"></div>
+
+            <!-- NIVEAU 3 : Managers (4) -->
+            <div class="connector-split split-4 level-3">
+                <div class="child-node">
+                    <div class="org-card">
+                        <span class="status-dot"></span>
+                        <div class="avatar"><i class="bi bi-code-slash"></i></div>
+                        <div class="name">Luc Moreau</div>
+                        <div class="role">Resp. Développement</div>
+                        <span class="badge-dept">Dev</span>
+                    </div>
+                </div>
+                <div class="child-node">
+                    <div class="org-card">
+                        <span class="status-dot"></span>
+                        <div class="avatar"><i class="bi bi-bar-chart-line"></i></div>
+                        <div class="name">Anne Petit</div>
+                        <div class="role">Resp. Data</div>
+                        <span class="badge-dept">Data</span>
+                    </div>
+                </div>
+                <div class="child-node">
+                    <div class="org-card">
+                        <span class="status-dot"></span>
+                        <div class="avatar"><i class="bi bi-cart3"></i></div>
+                        <div class="name">Marc Duval</div>
+                        <div class="role">Resp. Ventes</div>
+                        <span class="badge-dept">Sales</span>
+                    </div>
+                </div>
+                <div class="child-node">
+                    <div class="org-card">
+                        <span class="status-dot"></span>
+                        <div class="avatar"><i class="bi bi-megaphone"></i></div>
+                        <div class="name">Claire Roux</div>
+                        <div class="role">Resp. Marketing</div>
+                        <span class="badge-dept">Marketing</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connecteur vertical -->
+            <div class="connector-down"></div>
+
+            <!-- NIVEAU 4 : Équipes (5) -->
+            <div class="connector-split split-5 level-4">
+                <div class="child-node">
+                    <div class="org-card">
+                        <div class="avatar"><i class="bi bi-window-stack"></i></div>
+                        <div class="name">Équipe Frontend</div>
+                        <div class="role">4 développeurs</div>
+                        <span class="badge-dept">React / Vue</span>
+                    </div>
+                </div>
+                <div class="child-node">
+                    <div class="org-card">
+                        <div class="avatar"><i class="bi bi-server"></i></div>
+                        <div class="name">Équipe Backend</div>
+                        <div class="role">5 développeurs</div>
+                        <span class="badge-dept">Python / Java</span>
+                    </div>
+                </div>
+                <div class="child-node">
+                    <div class="org-card">
+                        <div class="avatar"><i class="bi bi-database-gear"></i></div>
+                        <div class="name">Équipe Data</div>
+                        <div class="role">3 analystes</div>
+                        <span class="badge-dept">SQL / Power BI</span>
+                    </div>
+                </div>
+                <div class="child-node">
+                    <div class="org-card">
+                        <div class="avatar"><i class="bi bi-cloud-arrow-up"></i></div>
+                        <div class="name">Équipe DevOps</div>
+                        <div class="role">3 ingénieurs</div>
+                        <span class="badge-dept">CI/CD</span>
+                    </div>
+                </div>
+                <div class="child-node">
+                    <div class="org-card">
+                        <div class="avatar"><i class="bi bi-telephone-outbound"></i></div>
+                        <div class="name">Équipe Commerciale</div>
+                        <div class="role">6 commerciaux</div>
+                        <span class="badge-dept">B2B / B2C</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Légende -->
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: linear-gradient(135deg, #4f46e5, #7c3aed);"></div>Direction
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: linear-gradient(135deg, #0891b2, #06b6d4);"></div>Directeurs
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: linear-gradient(135deg, #f59e0b, #f97316);"></div>Managers
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: linear-gradient(135deg, #10b981, #34d399);"></div>Équipes
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
