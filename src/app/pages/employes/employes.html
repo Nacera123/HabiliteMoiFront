@@ -11,8 +11,7 @@
     <div class="card-style mb-30">
       <h6 class="mb-10">Employes</h6>
 
-      <a routerLink="/admin/employes/new" class="main-btn dark-btn square-btn btn-hover">Ajouter un Employé</a>
-
+      <app-add routerLink="/admin/employes/new">Ajouter un Employé</app-add>
       <div class="table-wrapper table-responsive">
         <table class="table">
 
@@ -50,14 +49,11 @@
 
               <td>
                 <div class="action">
-                  <button class="text-danger">
-                    <i class="lni lni-trash-can"></i>
-                  </button>                  
-                  <button class="text-primary">
-                    <i class="lni lni-pencil"></i>
-                  </button>                  
+                
+                  <app-delete (click)="deleteEmploye(employe)"></app-delete>
 
                   <app-see [routerLink]="['/admin/employes', employe.id]"> </app-see>
+                  <app-update [routerLink]="['/admin/employes/update', employe.id]"> </app-update>
                  
                 </div>
               </td>

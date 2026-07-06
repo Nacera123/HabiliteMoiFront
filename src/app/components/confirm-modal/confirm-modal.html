@@ -1,0 +1,9 @@
+<div class="confirm-overlay" *ngIf="confirmService.visible()">
+  <div class="confirm-box">
+    <p>{{ confirmService.message() }}</p>
+    <div class="confirm-actions">
+      <button class="main-btn dark-btn square-btn btn-hover" (click)="confirmService.confirm()">Oui</button>
+      <button class="main-btn secondary-btn square-btn btn-hover" (click)="confirmService.cancel()">Annuler</button>
+    </div>
+  </div>
+</div>

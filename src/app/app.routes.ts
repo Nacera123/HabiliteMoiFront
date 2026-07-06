@@ -4,6 +4,7 @@ import { Admin } from './pages/admin/admin';
 import { Employes } from './pages/employes/employes';
 import { EmployesFiche } from './components/fiche/employes/employesfiche';
 import { EmployeForm } from './components/forms/employe-form/employe-form';
+import { Add } from './components/button/add/add';
 
 
 export const routes: Routes = [
@@ -14,6 +15,7 @@ export const routes: Routes = [
         children: [
             { path: 'employes', component: Employes },
             { path: 'employes/new', component: EmployeForm },
+            { path: 'employes/update/:id', component: EmployeForm },
             { path: 'employes/:id', component: EmployesFiche },
 
         ] 
