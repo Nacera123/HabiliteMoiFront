@@ -12,7 +12,6 @@ import { Employes } from '../../../pages/employes/employes';
   imports: [
     CommonModule,
     Return,
-    Employes,
     RouterModule,
   ],
   templateUrl: './employesfiche.html',

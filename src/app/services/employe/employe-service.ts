@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Employe } from '../../models/employe';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.dev';
 import { Router } from '@angular/router';
 
@@ -114,7 +114,7 @@ export class EmployeService {
   //4- Modifier un employe
   update(employe: Employe) : Observable<Employe> {
     let api = `${this.baseUrl}/update/${employe.id}`;
-    return this.http.put<Employe>(api, employe)
+    return this.http.post<Employe>(api, employe)
       .pipe(
         catchError(
           (error: HttpErrorResponse) => this.handleError(error)
@@ -123,13 +123,22 @@ export class EmployeService {
   }
 
   //5- Supprimer un employe
-  delete(id?: number) : Observable<void> {
-    let api = `${this.baseUrl}/delete/${id}`;
-    return this.http.delete<void>(api)
-      .pipe(
-        catchError(
-          (error: HttpErrorResponse) => this.handleError(error)
-        )
-      )
-  }
+  // delete(id?: number) {
+  //   let api = `${this.baseUrl}/delete/${id}`;
+  //   return this.http.delete<void>(api)
+  //     .pipe(
+  //       catchError(
+  //         (error: HttpErrorResponse) => this.handleError(error)
+  //       )
+  //     )
+  // }
+
+  delete(id?: number): Observable<void> {
+  let api = `${this.baseUrl}/delete/${id}`;
+  return this.http.delete(api, { responseType: 'text' as 'json' })
+    .pipe(
+      map(() => void 0),
+      catchError((error: HttpErrorResponse) => this.handleError(error))
+    );
+}
 }

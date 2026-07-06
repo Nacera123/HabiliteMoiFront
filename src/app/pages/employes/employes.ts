@@ -5,11 +5,12 @@ import { EmployeService } from '../../services/employe/employe-service';
 import { SearchService } from '../../services/search-service'; // 👈 adapte le chemin
 import { Employe } from '../../models/employe';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { EmployesFiche } from '../../components/fiche/employes/employesfiche';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { See } from '../../components/button/see/see';
-import { Return } from '../../components/button/return/return';
-import { EmployeForm } from '../../components/forms/employe-form/employe-form';
+import { Add } from '../../components/button/add/add';
+import { Update } from '../../components/button/update/update';
+import { ConfirmService } from '../../services/confirm/confirm';
+import { Delete } from '../../components/button/delete/delete';
 
 @Component({
   selector: 'app-employes',
@@ -19,8 +20,9 @@ import { EmployeForm } from '../../components/forms/employe-form/employe-form';
     NgxPaginationModule,
     RouterModule,
     See,
-    // Return,
-    // EmployeForm,
+    Add,
+    Update,
+    Delete,
   ],
   templateUrl: './employes.html',
   styleUrl: './employes.css',
@@ -68,7 +70,10 @@ export class Employes implements OnInit, OnDestroy {
   constructor(
     private employeService: EmployeService,
     private searchService: SearchService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private confirmService: ConfirmService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -89,6 +94,7 @@ export class Employes implements OnInit, OnDestroy {
     this.employeService.getEmployes().subscribe({
       next: (response) => {
         this.employes = response;
+        this.currentPage = 1;
         this.cdr.detectChanges();
       },
       error: (error) => this.errormsg = error
@@ -99,5 +105,29 @@ export class Employes implements OnInit, OnDestroy {
   pageChanged(event: any): void {
     this.currentPage = event;
   }
+
+
+  async deleteEmploye(employe: Employe): Promise<void> {
+    const ok = await this.confirmService.ask(
+      `Voulez-vous vraiment supprimer ${employe.nom} ${employe.prenom}`
+    );
+
+    if (!ok) return;
+
+      this.employeService.delete(employe.id).subscribe({
+        next: () => {
+          alert("L'employé a bien été supprimé");
+          this.getEmployes();
+        },
+        error: (err) => {
+          console.error('Erreur (mais suppression probablement OK côté serveur) :', err);
+        }
+    });
+    
+      
+  }
+
+   
+  
 
 }
