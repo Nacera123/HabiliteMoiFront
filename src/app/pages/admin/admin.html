@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon" />
+    <title>PlainAdmin Demo | Bootstrap 5 Admin Template</title>
+
+
+  </head>
+  <body>
+
+
+    <!-- ======== sidebar-nav start =========== -->
+    <app-sidebar [active]="sidebarActive"></app-sidebar>
+    <div class="overlay" [class.active]="overlayActive" (click)="closeSidebar()"></div>
+    <!-- ======== sidebar-nav end =========== -->
+
+    <!-- ======== main-wrapper start =========== -->
+    <main class="main-wrapper" [class.active]="mainWrapperActive">
+      <!-- ========== header start ========== -->
+    <app-header [menuIcon]="menuIcon" (menuToggle)="toggleSidebar()"></app-header>
+      <!-- ========== header end ========== -->
+
+      <!-- ========== section start ========== -->
+      <section class="section">
+        <div class="container-fluid">
+          <router-outlet></router-outlet>
+        </div>
+      </section>
+      <!-- ========== section end ========== -->
+
+      <!-- ========== footer start =========== -->
+        <app-footer></app-footer>
+      <!-- ========== footer end =========== -->
+    </main>
+   
+
+
+
+
+  </body>
+</html>

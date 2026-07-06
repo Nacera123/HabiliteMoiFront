@@ -1,0 +1,23 @@
+
+
+<div class="the-details mt-4">
+  <app-return [routerLink]="['/admin/employes']"> </app-return>
+    <div>
+        <div>
+            <div>
+                <h4 *ngIf="selectedEmploye()">{{ selectedEmploye()?.nom }} {{ selectedEmploye()?.prenom }} </h4>
+            </div>
+            <div class="mt-4">
+                <p *ngIf="selectedEmploye()"><b>Nom :</b> {{ selectedEmploye()?.nom }}</p>
+                <p *ngIf="selectedEmploye()"><b>Prenom :</b> {{ selectedEmploye()?.prenom }}</p>
+                <p *ngIf="selectedEmploye()"><b>Email :</b> {{ selectedEmploye()?.email }}</p>
+                <p *ngIf="selectedEmploye()"><b>Téléphone :</b> {{ selectedEmploye()?.tel }}</p>
+
+            </div>
+            <!-- <div style="text-align: center;">
+                <app-retour [routerLink]="['/admin/poste-de-travail']"></app-retour>
+
+            </div> -->
+        </div>
+    </div>
+</div>

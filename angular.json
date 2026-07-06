@@ -19,13 +19,28 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets",
+              "src/assets/img"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/css/materialdesignicons.min.css",
+              "src/assets/css/lineicons.css",
+              "src/assets/css/fullcalendar.css",
+              "src/assets/css/main.css"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", 
+              "src/assets/js/Chart.min.js", 
+              "src/assets/js/dynamic-pie-chart.js",
+              "src/assets/js/moment.min.js",
+              "src/assets/js/fullcalendar.js",
+              "src/assets/js/jvectormap.min.js",
+              "src/assets/js/world-merc.js",
+              "src/assets/js/polyfill.js"
+
             ]
           },
           "configurations": {
