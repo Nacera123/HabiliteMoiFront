@@ -122,23 +122,23 @@ export class EmployeService {
       )
   }
 
-  //5- Supprimer un employe
   // delete(id?: number) {
-  //   let api = `${this.baseUrl}/delete/${id}`;
-  //   return this.http.delete<void>(api)
-  //     .pipe(
-  //       catchError(
-  //         (error: HttpErrorResponse) => this.handleError(error)
-  //       )
-  //     )
-  // }
-
+    //   let api = `${this.baseUrl}/delete/${id}`;
+    //   return this.http.delete<void>(api)
+    //     .pipe(
+      //       catchError(
+        //         (error: HttpErrorResponse) => this.handleError(error)
+        //       )
+        //     )
+        // }
+        
+  //5- Supprimer un employe
   delete(id?: number): Observable<void> {
-  let api = `${this.baseUrl}/delete/${id}`;
-  return this.http.delete(api, { responseType: 'text' as 'json' })
-    .pipe(
-      map(() => void 0),
-      catchError((error: HttpErrorResponse) => this.handleError(error))
-    );
-}
+    let api = `${this.baseUrl}/delete/${id}`;
+    return this.http.delete(api, { responseType: 'text' as 'json' })
+      .pipe(
+        map(() => void 0),
+        catchError((error: HttpErrorResponse) => this.handleError(error))
+      );
+  }
 }
