@@ -1,0 +1,21 @@
+<div class="the-details mt-4">
+  <app-return [routerLink]="['/admin/direction']"> </app-return>
+    <div>
+        <div>
+            <div>
+                <h4 *ngIf="selectedDirection()">{{ selectedDirection()?.service }}  </h4>
+            </div>
+            <div class="mt-4">
+                <p *ngIf="selectedDirection()"><b>Nom de la direction:</b> {{ selectedDirection()?.service }}</p>
+                <p *ngIf="selectedDirection()"><b>Sous la responsablilité de  :</b> {{ selectedDirection()?.employes?.nom }}  {{ selectedDirection()?.employes?.prenom }}</p>
+                <p *ngIf="selectedDirection()"><b>Ce responsable est-il l'adjoint du PDG :</b> {{ selectedDirection()?.adjoint }}</p>
+
+            </div>
+            <!-- <div style="text-align: center;">
+                <app-retour [routerLink]="['/admin/poste-de-travail']"></app-retour>
+
+            </div> -->
+        </div>
+    </div>
+</div>
+
