@@ -13,6 +13,9 @@ import { PoleForm } from './components/forms/pole-form/pole-form';
 import { Postes } from './pages/postes/postes';
 import { PosteFiche } from './components/fiche/poste-fiche/poste-fiche';
 import { PosteForm } from './components/forms/poste-form/poste-form';
+import { Gares } from './pages/gares/gares';
+import { GareForm } from './components/forms/gare-form/gare-form';
+import { GareFiche } from './components/fiche/gare-fiche/gare-fiche';
 
 
 export const routes: Routes = [
@@ -43,6 +46,12 @@ export const routes: Routes = [
             { path: 'poste/new', component: PosteForm },
             { path: 'poste/update/:id', component: PosteForm },
             { path: 'poste/:id', component: PosteFiche },
+
+            //Gare
+            { path: 'gare', component: Gares },
+            { path: 'gare/new', component: GareForm },
+            { path: 'gare/update/:id', component: GareForm },
+            { path: 'gare/:id', component: GareFiche },
 
         ] 
 
