@@ -1,0 +1,91 @@
+<h2 class="card-title pt-4 pb-4">
+  {{ formulaire ? 'Modifier un pôle' : 'Créer un pôle' }}
+</h2>
+
+<div class="card-body" style="width:500px;margin-bottom:200px;" *ngIf="form">
+
+  <div *ngIf="errorMessage()?.length" class="alert alert-danger text-center p-4 m-4">
+    {{ errorMessage() }}
+  </div>
+
+  <form class="row g-3" [formGroup]="form" (ngSubmit)="create()">
+
+    <div class="col-12">
+      <label class="form-label">Nom</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="nom">
+    </div>
+
+    <div class="col-12 mb-2">
+        <label class="form-label">Responsable</label>
+
+        <select
+            class="form-select"
+            formControlName="employes"
+            [compareWith]="compareEmploye">
+
+            <option [ngValue]="null", disabled>
+            Choisir un responsable
+            </option>
+            <option [ngValue]="null">
+            Aucun responsable
+            </option>
+            <option
+            *ngFor="let e of employes"
+            [ngValue]="e">
+            {{ e.nom }} {{ e.prenom }}
+            </option>
+
+        </select>
+    </div>
+    <div class="col-12 mb-2">
+        <label class="form-label">Direction</label>
+
+        <select
+            class="form-select"
+            formControlName="direction"
+            [compareWith]="compareDirection">
+
+            <option [ngValue]="null", disabled>
+                Choisir une direction
+            </option>
+            <option
+                *ngFor="let d of direction"
+                [ngValue]="d">
+                {{ d.service }} 
+            </option>
+
+        </select>
+    </div>
+
+    <div class="col-12 d-flex align-items-center gap-3">
+      <label class="form-label mb-0">Adjoint du Directeur</label>
+
+      <button
+        type="button"
+        class="btn btn-sm"
+        [class.btn-success]="form.value.adjoint"
+        [class.btn-outline-secondary]="!form.value.adjoint"
+        (click)="toggleAdjoint()">
+
+        {{ form.value.adjoint ? 'Oui' : 'Non' }}
+
+      </button>
+    </div>
+
+    <div class="col-12">
+      <button
+        type="submit"
+        class="btn btn-warning btn-lg text-light"
+        [disabled]="form.invalid">
+
+        Valider
+
+      </button>
+    </div>
+
+  </form>
+
+</div>

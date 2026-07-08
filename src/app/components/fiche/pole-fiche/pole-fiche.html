@@ -1,0 +1,22 @@
+<div class="the-details mt-4">
+  <app-return [routerLink]="['/admin/pole']"> </app-return>
+    <div>
+        <div>
+            <div>
+                <h4 *ngIf="selectedPole()">{{ selectedPole()?.nom }}  </h4>
+            </div>
+            <div class="mt-4">
+                <p *ngIf="selectedPole()"><b>Nom du Pôle:</b> {{ selectedPole()?.nom }}</p>
+                <p *ngIf="selectedPole()"><b>Appartien a  :</b> {{ selectedPole()?.direction?.service }}  </p>
+                <p *ngIf="selectedPole()"><b>responsable du pole :</b> {{ selectedPole()?.employes?.nom }}  {{ selectedPole()?.employes?.prenom }} </p>
+                <p *ngIf="selectedPole()"><b>Ce responsable est-il l'adjoint du Directeur:</b> {{ selectedPole()?.adjoint }}</p>
+
+            </div>
+            <!-- <div style="text-align: center;">
+                <app-retour [routerLink]="['/admin/poste-de-travail']"></app-retour>
+
+            </div> -->
+        </div>
+    </div>
+</div>
+

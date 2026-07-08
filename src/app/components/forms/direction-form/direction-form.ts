@@ -31,41 +31,62 @@ export class DirectionForm implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
+    compareEmploye(e1: Employe, e2: Employe): boolean {
+    return e1 && e2 ? e1.id === e2.id : e1 === e2;
+  }
 
-    this.form = this.fb.group({
-      service: ['', Validators.required],
-      employes: [null],
-      adjoint: [false],
-    });
+ngOnInit(): void {
+
+  this.form = this.fb.group({
+    service: ['', Validators.required],
+    employes: [null],
+    adjoint: [false],
+  });
+
+  this.activatedRoute.params.subscribe(params => {
+
+    const id = params['id'];
 
     this.employeService.getEmployes().subscribe({
-      next: (response) => this.employes = response,
-      error: (error) => console.error(error)
-    });
+      next: (response) => {
 
-    this.activatedRoute.params.subscribe(params => {
-      const id = params['id'];
+        this.employes = response;
 
-      if (id) {
-        this.directionService.getById(id).subscribe({
-          next: (formulaire) => {
-            this.formulaire = formulaire;
+        if (id) {
 
-            this.form.patchValue({
-              service: formulaire.service,
-              employes: formulaire.employes,
-              adjoint: formulaire.adjoint
-            });
-          },
-          error: (error) => {
-            console.error(error);
-            this.errorMessage.set(error.message ?? 'Erreur');
-          }
-        });
+          this.directionService.getById(id).subscribe({
+            next: (formulaire) => {
+
+              this.formulaire = formulaire;
+
+              const employe = this.employes.find(
+                e => e.id === formulaire.employes?.id
+              );
+
+              this.form.patchValue({
+                service: formulaire.service,
+                employes: employe ?? null,
+                adjoint: formulaire.adjoint
+              });
+
+            },
+            error: (error) => {
+              console.error(error);
+              this.errorMessage.set(error.message ?? 'Erreur');
+            }
+          });
+
+        }
+
+      },
+      error: (error) => {
+        console.error(error);
       }
     });
-  }
+
+  });
+
+}
 
   toggleAdjoint(): void {
     this.form.patchValue({
