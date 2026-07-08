@@ -1,0 +1,27 @@
+<div class="the-details mt-4">
+  <app-return [routerLink]="['/admin/poste']"> </app-return>
+    <div>
+        <div>
+            <div>
+                <h4 *ngIf="selectedPoste()">{{ selectedPoste()?.intitule }}  </h4>
+            </div>
+            <div class="mt-4">
+                <p *ngIf="selectedPoste()"><b>Nom du Poste:</b> {{ selectedPoste()?.intitule }}</p>
+                <p *ngIf="selectedPoste()"><b>Occupé par :</b> {{ selectedPoste()?.employes?.nom }}  {{ selectedPoste()?.employes?.prenom }} </p>
+                <p *ngIf="selectedPoste()"><b>Est dans l'equipe de :</b> {{ selectedPoste()?.responsable?.employes?.nom }}  {{ selectedPoste()?.responsable?.employes?.prenom }} </p>
+                <p *ngIf="selectedPoste()"><b>Est-il(elle) Adjoint du responsable:</b> {{ selectedPoste()?.adjoint }}</p>
+
+                <p *ngIf="selectedPoste()"><b>Appartient au Pôle :</b> {{ selectedPoste()?.pole?.nom }}  </p>
+                <p *ngIf="selectedPoste()"><b>Responsable du Pôle :</b> {{ selectedPoste()?.pole?.employes?.nom }}  {{ selectedPoste()?.pole?.employes?.prenom }}  </p>
+                <p *ngIf="selectedPoste()"><b>De la direction :</b> {{ selectedPoste()?.direction?.service }}  </p>
+                <p *ngIf="selectedPoste()"><b>Dont le responsable :</b> {{ selectedPoste()?.direction?.employes?.nom }}  {{ selectedPoste()?.direction?.employes?.prenom }}  </p>
+
+            </div>
+            <!-- <div style="text-align: center;">
+                <app-retour [routerLink]="['/admin/poste-de-travail']"></app-retour>
+
+            </div> -->
+        </div>
+    </div>
+</div>
+
