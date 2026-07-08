@@ -1,0 +1,19 @@
+
+
+<div class="the-details mt-4">
+  <app-return [routerLink]="['/admin/gare']"> </app-return>
+    <div>
+        <div>
+            <div>
+                <h4 *ngIf="selectedGare()">{{ selectedGare()?.nom }} </h4>
+            </div>
+            <div class="mt-4">
+                <p *ngIf="selectedGare()"><b>Nom :</b> {{ selectedGare()?.nom }}</p>
+            </div>
+            <!-- <div style="text-align: center;">
+                <app-retour [routerLink]="['/admin/poste-de-travail']"></app-retour>
+
+            </div> -->
+        </div>
+    </div>
+</div>
