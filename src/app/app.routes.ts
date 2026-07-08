@@ -7,6 +7,9 @@ import { EmployeForm } from './components/forms/employe-form/employe-form';
 import { Directions } from './pages/directions/directions';
 import { DirectionFiche } from './components/fiche/direction/direction-fiche/direction-fiche';
 import { DirectionForm } from './components/forms/direction-form/direction-form';
+import { Poles } from './pages/poles/poles';
+import { PoleFiche } from './components/fiche/pole-fiche/pole-fiche';
+import { PoleForm } from './components/forms/pole-form/pole-form';
 
 
 export const routes: Routes = [
@@ -25,6 +28,12 @@ export const routes: Routes = [
             { path: 'direction/new', component: DirectionForm },
             { path: 'direction/update/:id', component: DirectionForm },
             { path: 'direction/:id', component: DirectionFiche },
+
+            //pole
+            { path: 'pole', component: Poles },
+            { path: 'pole/new', component: PoleForm },
+            { path: 'pole/update/:id', component: PoleForm },
+            { path: 'pole/:id', component: PoleFiche },
 
         ] 
 

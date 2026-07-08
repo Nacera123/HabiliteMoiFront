@@ -18,25 +18,28 @@
         formControlName="service">
     </div>
 
-    <div class="col-12 mb-2">
-      <label class="form-label">Responsable</label>
+<div class="col-12 mb-2">
+  <label class="form-label">Responsable</label>
 
-      <select
-        class="form-select"
-        formControlName="employes">
+  <select
+    class="form-select"
+    formControlName="employes"
+    [compareWith]="compareEmploye">
 
-        <option [ngValue]="null" disabled>
-          Sélectionner un responsable
-        </option>
+    <option [ngValue]="null", disabled>
+      Choisir un responsable
+    </option>
+    <option [ngValue]="null">
+      Aucun responsable
+    </option>
+    <option
+      *ngFor="let e of employes"
+      [ngValue]="e">
+      {{ e.nom }} {{ e.prenom }}
+    </option>
 
-        <option
-          *ngFor="let e of employes"
-          [ngValue]="e">
-          {{ e.nom }} {{ e.prenom }}
-        </option>
-
-      </select>
-    </div>
+  </select>
+</div>
 
     <div class="col-12 d-flex align-items-center gap-3">
       <label class="form-label mb-0">Adjoint du DG</label>
