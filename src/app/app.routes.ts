@@ -21,6 +21,8 @@ import { EquipeForm } from './components/forms/equipe-form/equipe-form';
 import { EquipeFiche } from './components/fiche/equipe-fiche/equipe-fiche';
 import { Teams } from './pages/teams/teams';
 import { TeamsForm } from './components/forms/teams-form/teams-form';
+import { TypeHabilitations } from './pages/type-habilitations/type-habilitations';
+import { TypeHabilitationForm } from './components/forms/type-habilitation-form/type-habilitation-form';
 
 
 export const routes: Routes = [
@@ -67,6 +69,12 @@ export const routes: Routes = [
             { path: 'equipe/new', component: EquipeForm },
             { path: 'equipe/update/:id', component: EquipeForm },
             { path: 'equipe/:id', component: EquipeFiche },
+
+            //Type d'habilitation
+            { path: 'type-habilitation', component: TypeHabilitations },
+            { path: 'type-habilitation/new', component: TypeHabilitationForm },
+            { path: 'type-habilitation/update/:id', component: TypeHabilitationForm },
+            { path: 'type-habilitation/:id', component: EquipeFiche },
 
             //teams
             { path: 'teams', component: Teams },

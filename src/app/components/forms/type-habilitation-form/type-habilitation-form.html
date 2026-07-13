@@ -1,0 +1,38 @@
+
+<div class="form-elements-wrapper">
+  <div class="card-style mb-30">
+    
+    <h6 class="mb-25">
+    {{ formulaire ? "Modifier un type d'habilitation" : "Créer un type d'habilitation" }}
+    </h6>
+    <div *ngIf="errorMessage()?.length" class="alert-box danger-alert">
+      <div class="alert">
+        <p class="text-medium">
+          {{ errorMessage() }}
+        </p>
+      </div>
+    </div>
+
+    <form class="row g-3" [formGroup]="form" (ngSubmit)="create()">
+
+      <div class="input-style-1">
+        <label>Type</label>
+        <input type="text" placeholder="Type d'habilitation" formControlName="type">
+      </div>
+
+
+      <div class="col-12 d-flex justify-content-center align-items-center gap-3 mt-4">
+        <app-validate></app-validate>
+        <app-return-form [routerLink]="['/admin/type-habilitation']"></app-return-form>
+      </div>
+
+
+
+    </form>
+
+
+
+  </div>
+
+</div>
+
