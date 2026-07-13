@@ -1,117 +1,122 @@
-<h2 class="card-title pt-4 pb-4">
-  {{ formulaire ? 'Modifier un poste' : 'Créer un poste' }}
-</h2>
+<div class="form-elements-wrapper">
 
-<div class="card-body" style="width:500px;margin-bottom:200px;" *ngIf="form">
 
-  <div *ngIf="errorMessage()?.length" class="alert alert-danger text-center p-4 m-4">
-    {{ errorMessage() }}
-  </div>
+      <div class="card-style mb-30">
 
-  <form class="row g-3" [formGroup]="form" (ngSubmit)="create()">
+        <h6 class="mb-25">  {{ formulaire ? 'Modifier un poste' : 'Créer un poste' }} </h6>
 
-    <div class="col-12">
-      <label class="form-label">Intitulé</label>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="intitule">
-    </div>
+        <div *ngIf="errorMessage()?.length" class="alert-box danger-alert pl-100">
 
-    <div class="col-12 mb-2">
-        <label class="form-label">Occupé par</label>
+          <div class="alert">
+            
+            <p class="text-medium">
+              {{ errorMessage() }}
+            </p>
+          </div>
+        </div>
 
-        <select
-            class="form-select"
-            formControlName="employes"
-            [compareWith]="compareEmploye">
 
-            <option [ngValue]="null", disabled>
-                Choisir un(e) employé(e)
-            </option>
-            <option [ngValue]="null">
-                Aucun employé(e)
-            </option>
-            <option
-            *ngFor="let e of employes"
-            [ngValue]="e">
-            {{ e.nom }} {{ e.prenom }}
-            </option>
 
-        </select>
-    </div>
-    <div class="col-12 mb-2">
-        <label class="form-label">Appartient a un Pôle</label>
 
-        <select
-            class="form-select"
-            formControlName="pole"
-            [compareWith]="compareDirection">
+        <form class="row g-3" [formGroup]="form" (ngSubmit)="create()">
 
-            <option [ngValue]="null", disabled>
-                Choisir un pôle
-            </option>
-            <option [ngValue]="null">
-                Aucun pôle
-            </option>
-            <option
-                *ngFor="let p of pole"
-                [ngValue]="p">
-                {{ p.nom }} 
-            </option>
+          <div class="input-style-1">
+            <label>Intitulé</label>
+            <input type="text" placeholder="Intitulé du poste" formControlName="intitule" />
+          </div>
 
-        </select>
-    </div>
 
-    <div class="col-12 mb-2">
-        <label class="form-label">ou a une Direction</label>
+          <div class="input-style-1" >
+            <label>Occupé par</label>
+            <div class="select-position">
+              <ng-select 
+                class="select-style-2"
+                [items]="employes"
+                formControlName="employes"
+                [compareWith]="compareEmploye"
+                bindLabel="nom"
+                [searchable]="true"
+                [clearable]="true"
+                placeholder="Choisir un(e) employé(e)">
 
-        <select
-            class="form-select"
-            formControlName="direction"
-            [compareWith]="compareDirection">
+                <ng-template ng-option-tmp let-item="item">
+                  {{ item.nom }} {{ item.prenom }}
+                </ng-template>
 
-            <option [ngValue]="null", disabled>
-                Choisir une direction
-            </option>
-            <option [ngValue]="null">
-                Aucune direction
-            </option>
-            <option
-                *ngFor="let d of direction"
-                [ngValue]="d">
-                {{ d.service }} 
-            </option>
+              </ng-select>
 
-        </select>
-    </div>
+            </div>
+          </div>          
+          
+          <div class="input-style-1" >
+            <label>Appartient a une direction</label>
+            <div class="select-position">
+              <ng-select 
+                class="select-style-2"
+                [items]="direction"
+                formControlName="direction"
+                [compareWith]="compareDirection"
+                bindLabel="service"
+                [searchable]="true"
+                [clearable]="true"
+                placeholder="Choisir une direction">
 
-    <div class="col-12 d-flex align-items-center gap-3">
-      <label class="form-label mb-0">Adjoint du responsable de pôle</label>
+                <ng-template ng-option-tmp let-item="item">
+                  {{ item.service }} 
+                </ng-template>
 
-      <button
-        type="button"
-        class="btn btn-sm"
-        [class.btn-success]="form.value.adjoint"
-        [class.btn-outline-secondary]="!form.value.adjoint"
-        (click)="toggleAdjoint()">
+              </ng-select>
 
-        {{ form.value.adjoint ? 'Oui' : 'Non' }}
+            </div>
+          </div>          
+          
+          <div class="input-style-1" >
+            <label>Et ou a un pôle</label>
+            <div class="select-position">
+              <ng-select 
+                class="select-style-2"
+                [items]="polesFiltres"
+                formControlName="pole"
+                [compareWith]="comparePole"
+                bindLabel="nom"
+                [searchable]="true"
+                [clearable]="true"
+                placeholder="Choisir une direction">
 
-      </button>
-    </div>
+                <ng-template ng-option-tmp let-item="item">
+                  {{ item.nom }} 
+                </ng-template>
 
-    <div class="col-12">
-      <button
-        type="submit"
-        class="btn btn-warning btn-lg text-light"
-        [disabled]="form.invalid">
+              </ng-select>
 
-        Valider
+            </div>
+          </div>
 
-      </button>
-    </div>
 
-  </form>
+          
+          <div class="col-12 d-flex align-items-center gap-3 mb-30">
+              <label class="form-label mb-0">Est adjoint du responsable de pôle ? </label>
+
+              <button
+                type="button"
+                class="btn btn-sm"
+                [class.btn-success]="form.value.adjoint"
+                [class.btn-outline-secondary]="!form.value.adjoint"
+                (click)="toggleAdjoint()">
+
+                {{ form.value.adjoint ? 'Oui' : 'Non' }}
+
+              </button>
+          </div>
+
+
+          <div class="col-12 d-flex justify-content-center align-items-center gap-3 mt-4">
+            <app-validate></app-validate>
+            <app-return-form [routerLink]="['/admin/poste']"></app-return-form>
+          </div>
+
+        </form>                 
+      </div>
+
 
 </div>

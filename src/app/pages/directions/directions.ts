@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Direction } from '../../models/direction';
@@ -28,11 +28,11 @@ import { Delete } from '../../components/button/delete/delete';
   templateUrl: './directions.html',
   styleUrl: './directions.css',
 })
-export class Directions implements OnInit{
+export class Directions implements OnInit, OnDestroy{
 
   directions: Direction[] = [];
   directionSelectionne?: Direction;
-  errormsg?: string;
+  errorMessage = signal<string>('');
   searchTerm = '';
   private searchSub?: Subscription;
 
@@ -95,7 +95,7 @@ export class Directions implements OnInit{
         this.currentPage = 1;
         this.cdr.detectChanges();
       },
-      error: (error) => this.errormsg = error
+      error: (error) => this.errorMessage.set(error.message ?? 'Erreur')
     });
   }
 
@@ -118,9 +118,7 @@ export class Directions implements OnInit{
           alert("L'employé a bien été supprimé");
           this.getdirections();
         },
-        error: (err) => {
-          console.error('Erreur (mais suppression probablement OK côté serveur) :', err);
-        }
+        error: (error) => this.errorMessage.set(error.message ?? 'Erreur')
     });
     
       

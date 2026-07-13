@@ -4,5 +4,5 @@ export interface Direction{
     id?: number;
     service: string;
     adjoint:boolean;
-    employes: Employe;
+    employes?: Employe;
 }

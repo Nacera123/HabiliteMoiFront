@@ -1,72 +1,86 @@
-<h2 class="card-title pt-4 pb-4">
-  {{ formulaire ? 'Modifier une direction' : 'Créer une direction' }}
-</h2>
 
-<div class="card-body" style="width:500px;margin-bottom:200px;" *ngIf="form">
 
-  <div *ngIf="errorMessage()?.length" class="alert alert-danger text-center p-4 m-4">
-    {{ errorMessage() }}
-  </div>
 
-  <form class="row g-3" [formGroup]="form" (ngSubmit)="create()">
+<div class="form-elements-wrapper">
 
-    <div class="col-12">
-      <label class="form-label">Nom</label>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="service">
-    </div>
 
-<div class="col-12 mb-2">
-  <label class="form-label">Responsable</label>
+      <div class="card-style mb-30">
 
-  <select
-    class="form-select"
-    formControlName="employes"
-    [compareWith]="compareEmploye">
+        <h6 class="mb-25">{{ formulaire ? 'Modifier une direction' : 'Créer une direction' }}</h6>
 
-    <option [ngValue]="null", disabled>
-      Choisir un responsable
-    </option>
-    <option [ngValue]="null">
-      Aucun responsable
-    </option>
-    <option
-      *ngFor="let e of employes"
-      [ngValue]="e">
-      {{ e.nom }} {{ e.prenom }}
-    </option>
+        <div *ngIf="errorMessage()?.length" class="alert-box danger-alert">
 
-  </select>
+          <div class="alert">
+            
+            <p class="text-medium">
+              {{ errorMessage() }}
+            </p>
+          </div>
+        </div>
+
+
+
+
+        <form class="row g-3" [formGroup]="form" (ngSubmit)="create()">
+          <div class="input-style-1">
+            <label>Direction</label>
+            <input type="text" placeholder="Nom de la direction" formControlName="service" />
+          </div>
+
+
+          <ng-select 
+            class="select-style-2"
+            [items]="employesDisponibles()"
+            formControlName="employes"
+            [compareWith]="compareEmploye"
+            bindLabel="nom"
+            [searchable]="true"
+            [clearable]="true"
+            placeholder="Choisir un responsable">
+
+            <ng-template ng-label-tmp let-item="item">
+              {{ item.nom }} {{ item.prenom }}
+            </ng-template>
+
+            <ng-template ng-option-tmp let-item="item">
+              {{ item.nom }} {{ item.prenom }}
+            </ng-template>
+
+          </ng-select>
+
+
+          
+          <div class="col-12 d-flex align-items-center gap-3 mb-30">
+              <label class="form-label mb-0">Adjoint du DG</label>
+
+              <button
+                type="button"
+                class="btn btn-sm"
+                [class.btn-success]="form.value.adjoint"
+                [class.btn-outline-secondary]="!form.value.adjoint"
+                (click)="toggleAdjoint()">
+
+                {{ form.value.adjoint ? 'Oui' : 'Non' }}
+
+              </button>
+          </div>
+
+
+          <div class="col-12 d-flex justify-content-center align-items-center gap-3 mt-4">
+            <app-validate></app-validate>
+            <app-return-form [routerLink]="['/admin/direction']"></app-return-form>
+          </div>
+
+        </form>                 
+      </div>
+
+
 </div>
 
-    <div class="col-12 d-flex align-items-center gap-3">
-      <label class="form-label mb-0">Adjoint du DG</label>
 
-      <button
-        type="button"
-        class="btn btn-sm"
-        [class.btn-success]="form.value.adjoint"
-        [class.btn-outline-secondary]="!form.value.adjoint"
-        (click)="toggleAdjoint()">
 
-        {{ form.value.adjoint ? 'Oui' : 'Non' }}
 
-      </button>
-    </div>
 
-    <div class="col-12">
-      <button
-        type="submit"
-        class="btn btn-warning btn-lg text-light"
-        [disabled]="form.invalid">
 
-        Valider
 
-      </button>
-    </div>
 
-  </form>
-
-</div>

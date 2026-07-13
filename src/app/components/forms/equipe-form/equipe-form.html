@@ -1,0 +1,198 @@
+<div class="container p-4" *ngIf="poste">
+
+
+  <!-- Responsable sélectionné -->
+  <h1>
+    Équipe de 
+    {{ poste.employes?.nom }}
+    {{ poste.employes?.prenom }}
+  </h1>
+
+
+  <h6 class="text-muted">
+    {{ poste.intitule }}
+  </h6>
+
+
+  <p class="text-danger" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </p>
+
+
+
+  <!-- Membres actuels -->
+  <div class="mt-4 mb-3">
+
+    <h5>Membres actuels</h5>
+
+
+    <ul class="list-group w-50"
+        *ngIf="membresActuels.length > 0">
+
+
+      <li class="list-group-item d-flex justify-content-between align-items-center"
+          *ngFor="let membre of membresActuels">
+
+
+        <div>
+
+          <strong>
+            {{ membre.intitule }}
+          </strong>
+
+
+          <small class="text-muted"
+                 *ngIf="membre.employes">
+
+            —
+            {{ membre.employes.nom }}
+            {{ membre.employes.prenom }}
+
+          </small>
+
+
+        </div>
+
+
+
+        <button
+          class="btn btn-sm btn-outline-danger"
+          (click)="removeMembre(membre.id!)">
+
+          🗑️ Retirer
+
+        </button>
+
+
+      </li>
+
+
+    </ul>
+
+
+
+    <p class="text-muted"
+       *ngIf="membresActuels.length === 0">
+
+      Aucun membre dans cette équipe.
+
+    </p>
+
+
+  </div>
+
+
+
+
+
+  <!-- Ajouter un membre -->
+  <div class="mt-4">
+
+
+    <h5>Ajouter un membre</h5>
+
+
+    <div class="d-flex gap-2 w-50">
+
+
+
+      <select class="form-select"
+              [(ngModel)]="membreSelectionne">
+
+
+        <option [ngValue]="undefined">
+
+          -- Choisir un membre --
+
+        </option>
+
+
+
+        <option *ngFor="let membre of membresDisponibles"
+                [ngValue]="membre.id">
+
+
+          {{ membre.employes?.nom }}
+          {{ membre.employes?.prenom }}
+
+          -
+          
+          {{ membre.intitule }}
+
+
+        </option>
+
+
+
+      </select>
+
+
+
+
+      <button
+        class="btn btn-primary"
+        (click)="ajouterMembre()">
+
+
+        Ajouter
+
+
+      </button>
+
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+  <!-- Informations du poste -->
+  <div class="mt-4">
+
+    <hr>
+
+    <h6>Informations :</h6>
+
+    <p>
+      Poste ID :
+      {{ poste.id }}
+    </p>
+
+
+    <p>
+      Employé ID :
+      {{ poste.employes?.id }}
+    </p>
+
+
+    <p>
+      Pôle :
+      {{ poste.pole?.nom }}
+    </p>
+
+
+    <p>
+      Direction :
+      {{ poste.direction?.service }}
+    </p>
+
+
+  </div>
+
+
+
+
+
+  <a routerLink="/admin/equipe"
+     class="btn btn-secondary mt-4">
+
+    ← Retour
+
+  </a>
+
+
+</div>

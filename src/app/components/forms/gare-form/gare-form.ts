@@ -3,12 +3,20 @@ import { Component, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Gare } from '../../../models/gare';
 import { GareService } from '../../../services/gare/gare-service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Validate } from '../../button/validate/validate';
+import { ReturnForm } from '../../button/return-form/return-form';
 
 @Component({
   selector: 'app-gare-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule,
+    RouterLink,
+    Validate,
+    ReturnForm,
+  ],
   templateUrl: './gare-form.html',
   styleUrl: './gare-form.css',
 })

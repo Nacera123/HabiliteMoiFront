@@ -1,88 +1,51 @@
-<!-- <h2 class="card-title pt-4 pb-4">
 
-    {{ formulaire ? 'Nom de document update' : 'Nom de document create' }}
+<div class="form-elements-wrapper">
+  <div class="card-style mb-30">
+    
+    <h6 class="mb-25">{{ formulaire ? 'Modifier un employé' : 'Créer un employé' }}</h6>
 
-</h2>
-
-<div class="card-body" style="width: 500px;margin-bottom: 200px;" *ngIf="form">
-
-    <div *ngIf="errorMessage" class="alert alert-danger text-center p-4 m-4">
-        {{ errorMessage }}
+    <div *ngIf="errorMessage()?.length" class="alert-box danger-alert pl-100">
+      <div class="alert">
+        <p class="text-medium">
+          {{ errorMessage() }}
+        </p>
+      </div>
     </div>
 
-
-
     <form class="row g-3" [formGroup]="form" (ngSubmit)="create()">
-        <div class="col-12">
-            <label for="inputNanme4" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="inputNanme4" formControlName="nom">
-        </div>
 
-        <div class="col-12">
-            <label for="inputNanme4" class="form-label">prenom</label>
-            <input type="text" class="form-control" id="inputNanme4" formControlName="prenom">
-        </div>
+      <div class="input-style-1">
+        <label>Nom</label>
+        <input type="text" placeholder="Nom de l'employé(e)" formControlName="nom">
+      </div>
 
-        <div class="col-12">
-            <label for="inputNanme4" class="form-label">Nom</label>
-            <input type="email" class="form-control" id="inputNanme4" formControlName="email">
-        </div>
+      <div class="input-style-1">
+        <label>Prénom</label>
+        <input type="text" placeholder="Prénom de l'employé(e)" formControlName="prenom">
+      </div>
 
-        <div class="col-12">
-            <label for="inputNanme4" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="inputNanme4" formControlName="tel">
-        </div>
+      <div class="input-style-3">
+        <label>Email</label>
+        <input type="email" placeholder="Email de l'employé(e)" formControlName="email">
+      </div>
 
-        
-        <div class="col-12 text-center pt-4" *ngIf="!formulaire">
-            <button type="submit" class="btn btn-warning btn-lg text-light">Valider</button>
-        </div>
+      <div class="input-style-3">
+        <label>Téléphone</label>
+        <input type="tel" placeholder="numéro de téléphone de l'employé(e)" formControlName="tel">
+      </div>
+
+      <div class="col-12 d-flex justify-content-center align-items-center gap-3 mt-4">
+        <app-validate></app-validate>
+        <app-return-form [routerLink]="['/admin/employes']"></app-return-form>
+      </div>
+
+
 
     </form>
 
 
 
-</div> -->
-
-
-<h2 class="card-title pt-4 pb-4">
-  {{ formulaire ? 'Modifier employé' : 'Créer employé' }}
-</h2>
-
-<div class="card-body" style="width: 500px;margin-bottom: 200px;" *ngIf="form">
-
-<div *ngIf="errorMessage()?.length" class="alert alert-danger text-center p-4 m-4">
-  {{ errorMessage() }}
-</div>
-
-  <form class="row g-3" [formGroup]="form" (ngSubmit)="create()">
-
-    <div class="col-12">
-      <label class="form-label">Nom</label>
-      <input type="text" class="form-control" formControlName="nom">
-    </div>
-
-    <div class="col-12">
-      <label class="form-label">Prénom</label>
-      <input type="text" class="form-control" formControlName="prenom">
-    </div>
-
-    <div class="col-12">
-      <label class="form-label">Email</label>
-      <input type="email" class="form-control" formControlName="email">
-    </div>
-
-    <div class="col-12">
-      <label class="form-label">Téléphone</label>
-      <input type="text" class="form-control" formControlName="tel">
-    </div>
-
-    <div class="col-12 text-center pt-4">
-      <button type="submit" class="btn btn-warning btn-lg text-light">
-        Valider
-      </button>
-    </div>
-
-  </form>
+  </div>
 
 </div>
+

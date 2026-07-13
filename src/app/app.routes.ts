@@ -16,14 +16,22 @@ import { PosteForm } from './components/forms/poste-form/poste-form';
 import { Gares } from './pages/gares/gares';
 import { GareForm } from './components/forms/gare-form/gare-form';
 import { GareFiche } from './components/fiche/gare-fiche/gare-fiche';
+import { Equipes } from './pages/equipes/equipes';
+import { EquipeForm } from './components/forms/equipe-form/equipe-form';
+import { EquipeFiche } from './components/fiche/equipe-fiche/equipe-fiche';
+import { Teams } from './pages/teams/teams';
+import { TeamsForm } from './components/forms/teams-form/teams-form';
 
 
 export const routes: Routes = [
     { path: '', component: Home },
+                //teams
+            
     { 
         path: 'admin', 
         component: Admin, 
         children: [
+            { path: 'teams', component: Teams },
             { path: 'employes', component: Employes },
             { path: 'employes/new', component: EmployeForm },
             { path: 'employes/update/:id', component: EmployeForm },
@@ -32,6 +40,7 @@ export const routes: Routes = [
             //direction
             { path: 'direction', component: Directions },
             { path: 'direction/new', component: DirectionForm },
+            
             { path: 'direction/update/:id', component: DirectionForm },
             { path: 'direction/:id', component: DirectionFiche },
 
@@ -52,6 +61,19 @@ export const routes: Routes = [
             { path: 'gare/new', component: GareForm },
             { path: 'gare/update/:id', component: GareForm },
             { path: 'gare/:id', component: GareFiche },
+            
+            //Equipe
+            { path: 'equipe', component: Equipes },
+            { path: 'equipe/new', component: EquipeForm },
+            { path: 'equipe/update/:id', component: EquipeForm },
+            { path: 'equipe/:id', component: EquipeFiche },
+
+            //teams
+            { path: 'teams', component: Teams },
+            { path: 'teams/update/:id', component: TeamsForm },
+            
+
+            
 
         ] 
 

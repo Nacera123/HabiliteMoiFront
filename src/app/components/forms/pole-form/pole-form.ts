@@ -7,12 +7,22 @@ import { Direction } from '../../../models/direction';
 import { PoleService } from '../../../services/pole/pole-service';
 import { EmployeService } from '../../../services/employe/employe-service';
 import { DirectionService } from '../../../services/direction/direction-service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Validate } from '../../button/validate/validate';
+import { ReturnForm } from '../../button/return-form/return-form';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-pole-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule,
+    NgSelectModule,
+    RouterLink,
+    Validate,
+    ReturnForm,
+  ],
   templateUrl: './pole-form.html',
   styleUrl: './pole-form.css',
 })
@@ -97,12 +107,14 @@ ngOnInit(): void {
           },
           error: (error) => {
             console.error(error);
+            this.errorMessage = error;
           }
         });
 
       },
       error: (error) => {
         console.error(error);
+        this.errorMessage = error;
       }
     });
 
