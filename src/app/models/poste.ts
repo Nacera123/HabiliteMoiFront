@@ -7,8 +7,8 @@ export interface Poste{
     intitule: string;
     adjoint:boolean;
     employes?: Employe | null;
-    direction: Direction;
-    pole: Pole
+    direction?: Direction;
+    pole?: Pole
     responsable?: Poste | null;
     membres?: Poste[];
 }

@@ -18,39 +18,7 @@ export class EmployeService {
     private router: Router
   ) {}
 
-    // gestion des erreurs:
-  // private handleError(error: HttpErrorResponse): Observable<never> {
-  //   if (error.error instanceof ErrorEvent) {
-  //     // Erreur côté client
-  //     console.error('Erreur côté client: ', error.error.message);
-  //   } else {
-  //     // Erreur côté serveur
-  //     console.error(`Error serveur: ${error.status} - Message: ${error.error.message}`);
-  //   }
-  //   return throwError(() => error.error);
-  // }
-      
-  ///gestion des erreur
-    // private handleError(error: HttpErrorResponse): Observable<any> {
-    //     if (error.error instanceof ErrorEvent) {
-    //         // Erreur côté client
-    //         console.error(' Erreur côté client: ', error.error.message);
-    //     } else {
-    //         // Erreur côté serveur
-    //         console.log('Erreur côté serveur : ', error.statusText);
-    //         console.log('mon test : ', error);
 
-    //         console.error(
-    //             // `Error Code: ${error.status}\n` +
-    //             // `Message: ${error.error}` +
-    //             `MessageTest: ${error.error.message}`
-    //         );
-    //     }
-    //     return throwError(
-    //       () => error.error
-    //       // error.error
-    //     );
-    // }
 
     private handleError(error: HttpErrorResponse): Observable<never> {
         let message = 'Une erreur est survenue';
@@ -58,7 +26,7 @@ export class EmployeService {
         if (error.error instanceof ErrorEvent) {
             message = error.error.message;
         } else if (typeof error.error === 'string') {
-            message = error.error;
+            message = error.error.replace(/^\d+\s+[A-Z_]+\s+/i, '');
         } else if (error.error?.message) {
             message = error.error.message;
         } else if (error.message) {
@@ -122,16 +90,6 @@ export class EmployeService {
       )
   }
 
-  // delete(id?: number) {
-    //   let api = `${this.baseUrl}/delete/${id}`;
-    //   return this.http.delete<void>(api)
-    //     .pipe(
-      //       catchError(
-        //         (error: HttpErrorResponse) => this.handleError(error)
-        //       )
-        //     )
-        // }
-        
   //5- Supprimer un employe
   delete(id?: number): Observable<void> {
     let api = `${this.baseUrl}/delete/${id}`;

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { EmployeService } from '../../services/employe/employe-service';
@@ -31,7 +31,7 @@ export class Employes implements OnInit, OnDestroy {
 
   employes: Employe[] = [];
   employeSelectionne?: Employe;
-  errormsg?: string;
+  errorMessage = signal<string>('');
   searchTerm = '';
   private searchSub?: Subscription;
 
@@ -97,7 +97,7 @@ export class Employes implements OnInit, OnDestroy {
         this.currentPage = 1;
         this.cdr.detectChanges();
       },
-      error: (error) => this.errormsg = error
+      error: (error) => this.errorMessage.set(error.message ?? 'Erreur')
     });
   }
 
@@ -119,9 +119,7 @@ export class Employes implements OnInit, OnDestroy {
           alert("L'employé a bien été supprimé");
           this.getEmployes();
         },
-        error: (err) => {
-          console.error('Erreur (mais suppression probablement OK côté serveur) :', err);
-        }
+        error: (error) => this.errorMessage.set(error.message ?? 'Erreur')
     });
     
       

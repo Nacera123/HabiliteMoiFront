@@ -27,7 +27,8 @@ export class PoleService {
         if (error.error instanceof ErrorEvent) {
             message = error.error.message;
         }else if(typeof error.error === 'string'){
-            message = error.error;
+            // message = error.error;
+            message = error.error.replace(/^\d+\s+[A-Z_]+\s+/i, '');
         }else if(error.error?.message){
             message = error.error.message;
         }else if(error.message){
@@ -37,6 +38,7 @@ export class PoleService {
         console.error('Erreur backend: ', error);
         return throwError(
             () => new Error(message)
+            // () => new Error(message)
         )
         
     }

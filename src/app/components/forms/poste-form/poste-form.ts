@@ -9,12 +9,22 @@ import { PosteService } from '../../../services/poste/poste-service';
 import { EmployeService } from '../../../services/employe/employe-service';
 import { DirectionService } from '../../../services/direction/direction-service';
 import { PoleService } from '../../../services/pole/pole-service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { Validate } from '../../button/validate/validate';
+import { ReturnForm } from '../../button/return-form/return-form';
 
 @Component({
   selector: 'app-poste-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule,
+    NgSelectModule,
+    RouterLink,
+    Validate,
+    ReturnForm,
+  ],
   templateUrl: './poste-form.html',
   styleUrl: './poste-form.css',
 })
@@ -26,6 +36,7 @@ export class PosteForm implements OnInit {
   employes: Employe[] = [];
   direction: Direction[] = [];
   pole: Pole[] = [];
+  polesFiltres: Pole[] = [];
 
   constructor(
     private posteService: PosteService,
@@ -47,7 +58,7 @@ export class PosteForm implements OnInit {
     return e1 && e2 ? e1.id === e2.id : e1 === e2;
   }
 
-ngOnInit(): void {
+  ngOnInit(): void {
 
   this.form = this.fb.group({
     intitule: ['', Validators.required],
@@ -55,6 +66,23 @@ ngOnInit(): void {
     direction: [null],
     employes: [null],
     adjoint: [false],
+  });
+
+
+  // filtre des poles en fonction de la direction
+  this.form.get('direction')?.valueChanges.subscribe((direction: Direction | null) => {
+
+    if (!direction) {
+      this.polesFiltres = this.pole;
+    } else {
+      this.polesFiltres = this.pole.filter(
+        p => p.direction?.id === direction.id
+      );
+    }
+
+    // Réinitialise le pôle sélectionné
+    this.form.patchValue({ pole: null }, { emitEvent: false });
+
   });
 
   this.activatedRoute.params.subscribe(params => {
@@ -75,6 +103,7 @@ ngOnInit(): void {
               next: (pole) => {
 
                 this.pole = pole;
+                this.polesFiltres = pole;
 
                 if (id) {
     

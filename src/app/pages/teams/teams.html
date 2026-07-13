@@ -1,0 +1,135 @@
+<section>
+  <div class="container-fluid">
+
+    <div class="invoice-wrapper mt-4" *ngFor="let dir of directions()">
+
+      <!-- CARD DIRECTION -->
+      <div class="invoice-card card-style mb-30">
+
+        <!-- HEADER DIRECTION -->
+        <div class="invoice-header text-white p-3 rounded shadow bg-bleu-azur">
+          <div class="invoice-for">
+            <h2 class="mb-10">{{ dir.service }}</h2>
+
+            <p class="text-sm mb-0">
+              👤 {{ dir.employes?.nom }} {{ dir.employes?.prenom }}
+            </p>
+          </div>
+        </div>
+
+        <!-- CARD POLE -->
+        <div class="invoice-wrapper mt-4" *ngFor="let pole of poles()">
+
+          <div class="invoice-card card-style mb-30"
+               *ngIf="pole.direction?.id === dir.id">
+
+            <!-- HEADER POLE -->
+            <div class="invoice-header text-white p-3 rounded shadow bg-gris-pluie">
+              <div class="invoice-for">
+                <h2 class="mb-10">{{ pole.nom }}</h2>
+
+                <p class="text-sm mb-0">
+                  👤 {{ pole.employes?.nom }}
+                  {{ pole.employes?.prenom }}
+                </p>
+              </div>
+            </div>
+
+            <!-- RESPONSABLES -->
+            <ng-container *ngFor="let poste of postes()">
+
+              <div
+                *ngIf="poste.pole?.id === pole.id && poste.responsable == null"
+                class="card poste-card mt-2 p-2">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                  <div>
+                    <strong>{{ poste.intitule }}</strong>
+
+                    <small *ngIf="poste.employes" class="text-muted">
+                      — {{ poste.employes?.nom }}
+                      {{ poste.employes?.prenom }}
+                    </small>
+                  </div>
+
+                  <div>
+                    <a
+                      [routerLink]="['/admin/teams/update', poste.id]"
+                      class="btn btn-sm btn-outline-primary">
+                      ✏️
+                    </a>
+                  </div>
+
+                </div>
+
+                <!-- MEMBRES -->
+                <ng-container *ngFor="let membre of postes()">
+
+                  <div
+                    *ngIf="membre.responsable?.id === poste.id"
+                    class="card membre-card mt-2 p-2 ms-4">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                      <div>
+                        <span>{{ membre.intitule }}</span>
+
+                        <small *ngIf="membre.employes" class="text-muted">
+                          — {{ membre.employes?.nom }}
+                          {{ membre.employes?.prenom }}
+                        </small>
+                      </div>
+
+                      <a class="btn btn-sm btn-outline-danger">
+                        🗑️
+                      </a>
+
+                    </div>
+
+                    <!-- SOUS-MEMBRES -->
+                    <ng-container *ngFor="let sousMembre of postes()">
+
+                      <div
+                        *ngIf="sousMembre.responsable?.id === membre.id"
+                        class="card membre-card mt-2 p-2 ms-5">
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                          <div>
+                            <span>{{ sousMembre.intitule }}</span>
+
+                            <small *ngIf="sousMembre.employes" class="text-muted">
+                              — {{ sousMembre.employes?.nom }}
+                              {{ sousMembre.employes?.prenom }}
+                            </small>
+                          </div>
+
+                          <a class="btn btn-sm btn-outline-danger">
+                            🗑️
+                          </a>
+
+                        </div>
+
+                      </div>
+
+                    </ng-container>
+
+                  </div>
+
+                </ng-container>
+
+              </div>
+
+            </ng-container>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

@@ -1,27 +1,34 @@
-<h2 class="card-title pt-4 pb-4">
-  {{ formulaire ? 'Modifier gare' : 'Créer gare' }}
-</h2>
+<div class="form-elements-wrapper">
+  <div class="card-style mb-30">
+    
+    <h6 class="mb-25">{{ formulaire ? 'Modifier une gare' : 'Créer une gare' }}</h6>
 
-<div class="card-body" style="width: 500px;margin-bottom: 200px;" *ngIf="form">
-
-<div *ngIf="errorMessage()?.length" class="alert alert-danger text-center p-4 m-4">
-  {{ errorMessage() }}
-</div>
-
-  <form class="row g-3" [formGroup]="form" (ngSubmit)="create()">
-
-    <div class="col-12">
-      <label class="form-label">Nom</label>
-      <input type="text" class="form-control" formControlName="nom">
+    <div *ngIf="errorMessage()?.length" class="alert-box danger-alert pl-100">
+      <div class="alert">
+        <p class="text-medium">
+          {{ errorMessage() }}
+        </p>
+      </div>
     </div>
 
+    <form class="row g-3" [formGroup]="form" (ngSubmit)="create()">
 
-    <div class="col-12 text-center pt-4">
-      <button type="submit" class="btn btn-warning btn-lg text-light">
-        Valider
-      </button>
-    </div>
+      <div class="input-style-1">
+        <label>Gare</label>
+        <input type="text" placeholder="Nom de la gare" formControlName="nom">
+      </div>
 
-  </form>
+
+
+      <div class="col-12 d-flex justify-content-center align-items-center gap-3 mt-4">
+        <app-validate></app-validate>
+        <app-return-form [routerLink]="['/admin/gare']"></app-return-form>
+      </div>
+
+
+
+    </form>
+
+  </div>
 
 </div>

@@ -1,15 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EmployeService } from '../../../services/employe/employe-service';
 import { Employe } from '../../../models/employe';
-import { email } from '@angular/forms/signals';
+import { Validate } from '../../button/validate/validate';
+import { ReturnForm } from '../../button/return-form/return-form';
 
 @Component({
   selector: 'app-employe-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule,
+    RouterLink,
+    Validate,
+    ReturnForm,
+  ],
   templateUrl: './employe-form.html',
   styleUrl: './employe-form.css',
 })

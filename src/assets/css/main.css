@@ -2,9 +2,11 @@
 		COMMON css
 ===========================*/
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+@import "@ng-select/ng-select/themes/default.theme.css";
 html {
   scroll-behavior: smooth;
 }
+
 
 body {
   font-family: "Plus Jakarta Sans", sans-serif !important;
@@ -122,6 +124,7 @@ p {
   position: relative;
   box-shadow: 0px 12px 24px -4px rgba(145, 158, 171, 0.12), 0px 0px 2px 0px rgba(145, 158, 171, 0.2);
   border-radius: 7px;
+  margin-top: 1%;
 }
 @media (max-width: 767px) {
   .card-style {
@@ -713,7 +716,7 @@ h6,
 
 /* info buttons */
 .info-btn {
-  background: #97ca31;
+  background: #00A78E;
   color: #fff;
 }
 .info-btn:hover {
@@ -751,7 +754,7 @@ h6,
 
 /* dark buttons */
 .dark-btn {
-  background: #1A2142;
+  background: #840062;
   color: #fff;
 }
 .dark-btn:hover {
@@ -1785,8 +1788,10 @@ h6,
 .table .action button {
   border: none;
   background: transparent;
-  padding: 0px 6px;
+  padding: 0px 3px;
   font-size: 18px;
+  /* padding: 0px 6px;
+  font-size: 18px; */
 }
 .table .action button.edit:hover {
   color: #365CF5;
@@ -6009,3 +6014,7 @@ h6,
     height: auto;
     margin-right: 10px;
 }
+
+
+
+

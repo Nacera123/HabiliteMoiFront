@@ -5,6 +5,6 @@ export interface Pole{
     id?: number;
     nom: string;
     adjoint:boolean;
-    employes: Employe;
+    employes?: Employe;
     direction: Direction
 }

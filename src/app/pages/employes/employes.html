@@ -1,18 +1,20 @@
-<!-- 🔴 Message d'erreur -->
+<app-add routerLink="/admin/employes/new">Ajouter un Employé</app-add>
+
+<div class="row">
+
+    <div *ngIf="errorMessage()?.length" class="alert-box danger-alert pl-100 mt-4">
+      <div class="alert">
+        <p class="text-medium">
+          {{ errorMessage() }}
+        </p>
+      </div>
+    </div>
 
 
-<div class="row mt-3">
-
-  
-  <div class="alert alert-warning" role="alert" *ngIf="errormsg">
-    {{ errormsg }}
-  </div>
   <div class="col-lg-12">
     <div class="card-style mb-30">
-      <h6 class="mb-10">Employes</h6>
-
-      <app-add routerLink="/admin/employes/new">Ajouter un Employé</app-add>
       <div class="table-wrapper table-responsive">
+
         <table class="table">
 
           <thead>
@@ -21,42 +23,40 @@
               <th><h6>Prénom</h6></th>
               <th><h6>Email</h6></th>
               <th><h6>Téléphone</h6></th>
-              <th><h6>Action</h6></th>
+              <th><h6>Actions</h6></th>
             </tr>
           </thead>
 
           <tbody>
-            <!-- Liste des employés -->
-            <!-- <tr *ngFor="let employe of employes | paginate: { itemsPerPage: pageSize, currentPage: currentPage }"> -->
-                <tr *ngFor="let employe of employesPagines">
-              <td class="min-width">
-                <p>{{ employe.nom }}</p>
-              </td>
+              <tr *ngFor="let employe of employesPagines">
+                <td class="min-width">
+                  <p>{{ employe.nom }}</p>
+                </td>
 
-              <td class="min-width">
-                <p>
-                  <a href="#0">{{ employe.prenom }}</a>
-                </p>
-              </td>
+                <td class="min-width">
+                  <p>
+                    <a href="#0">{{ employe.prenom }}</a>
+                  </p>
+                </td>
 
-              <td class="min-width">
-                <p>{{ employe.email }}</p>
-              </td>
+                <td class="min-width">
+                  <p>{{ employe.email }}</p>
+                </td>
 
-              <td class="min-width">
-                <p>{{ employe.tel }}</p>
-              </td>
+                <td class="min-width">
+                  <p>{{ employe.tel }}</p>
+                </td>
 
-              <td>
-                <div class="action">
-                
-                  <app-delete (click)="deleteEmploye(employe)"></app-delete>
+                <td>
+                  <div class="action">
+                  
+                    <app-delete (click)="deleteEmploye(employe)"></app-delete>
 
-                  <app-see [routerLink]="['/admin/employes', employe.id]"> </app-see>
-                  <app-update [routerLink]="['/admin/employes/update', employe.id]"> </app-update>
-                 
-                </div>
-              </td>
+                    <app-see [routerLink]="['/admin/employes', employe.id]"> </app-see>
+                    <app-update [routerLink]="['/admin/employes/update', employe.id]"> </app-update>
+                  
+                  </div>
+                </td>
 
             </tr>
 
