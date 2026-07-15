@@ -1,0 +1,21 @@
+.form-elements-wrapper{
+    margin-top: 2%;
+    width: 60%;
+    
+}
+.card-style{
+    padding: 5% 10% 10% 10%;
+}
+
+::ng-deep .select-style-2 .ng-select-container {
+  height: 60px !important;
+  min-height: 60px !important;
+}
+
+::ng-deep .select-style-2 .ng-value-container {
+  align-items: center;
+}
+
+::ng-deep .select-style-2 .ng-placeholder {
+  line-height: 60px;
+}

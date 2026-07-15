@@ -1,0 +1,22 @@
+<div class="the-details mt-4">
+  <app-return [routerLink]="['/admin/liens-habilitation']"> </app-return>
+    <div>
+        <div>
+            <div>
+                <h4 *ngIf="selectedLien()">Type d'habilitation: {{ selectedLien()?.typeHabilitation?.type }}  </h4>
+            </div>
+            <div class="mt-4">
+                <p *ngIf="selectedLien()"><b>Outil / application:</b> {{ selectedLien()?.outil }}</p>
+                <p *ngIf="selectedLien()"><b>Lien d'accès :</b> {{ selectedLien()?.lien}} </p>
+                <p *ngIf="selectedLien()"><b>Lien pour habiliter :</b> {{ selectedLien()?.urlHabilitation }} </p>
+                <p *ngIf="selectedLien()"><b>Notes supplémentaire:</b> {{ selectedLien()?.description }}</p>
+
+            </div>
+            <!-- <div style="text-align: center;">
+                <app-retour [routerLink]="['/admin/poste-de-travail']"></app-retour>
+
+            </div> -->
+        </div>
+    </div>
+</div>
+
