@@ -23,6 +23,9 @@ import { Teams } from './pages/teams/teams';
 import { TeamsForm } from './components/forms/teams-form/teams-form';
 import { TypeHabilitations } from './pages/type-habilitations/type-habilitations';
 import { TypeHabilitationForm } from './components/forms/type-habilitation-form/type-habilitation-form';
+import { Lienhabilitations } from './pages/lienhabilitations/lienhabilitations';
+import { LienHabilitationForm } from './components/forms/lien-habilitation-form/lien-habilitation-form';
+import { LienHabilitationFiche } from './components/fiche/lien-habilitation-fiche/lien-habilitation-fiche';
 
 
 export const routes: Routes = [
@@ -75,6 +78,13 @@ export const routes: Routes = [
             { path: 'type-habilitation/new', component: TypeHabilitationForm },
             { path: 'type-habilitation/update/:id', component: TypeHabilitationForm },
             { path: 'type-habilitation/:id', component: EquipeFiche },
+
+
+            //Liens d'habilitation
+            { path: 'liens-habilitation', component: Lienhabilitations },
+            { path: 'liens-habilitation/new', component: LienHabilitationForm },
+            { path: 'liens-habilitation/update/:id', component: LienHabilitationForm },
+            { path: 'liens-habilitation/:id', component: LienHabilitationFiche },
 
             //teams
             { path: 'teams', component: Teams },

@@ -1,15 +1,13 @@
-<app-add routerLink="/admin/poste/new">Ajouter un Poste</app-add>
+<app-add routerLink="/admin/liens-habilitation/new">Ajouter une habilitation</app-add>
 <div class="row">
 
-  <div *ngIf="errormsg" class="alert-box danger-alert">
-
-    <div class="alert">
-      
-      <p class="text-medium">
-        {{ errormsg }}
-      </p>
+    <div *ngIf="errorMessage()?.length" class="alert-box danger-alert  mt-4">
+      <div class="alert">
+        <p class="text-medium">
+          {{ errorMessage() }}
+        </p>
+      </div>
     </div>
-  </div>
 
   <div class="col-lg-12">
     <div class="card-style mb-30">
@@ -19,55 +17,48 @@
 
           <thead>
             <tr>
-              <th><h6>Poste</h6></th>
-              <th><h6>Employé(e)</h6></th>
-              <th><h6>Pôle</h6></th>
-              <th><h6>Direction</h6></th>
-              <th><h6>Responsable</h6></th>
-              <th><h6>Adjoint du Responsable</h6></th>
-              <th><h6>Action</h6></th>
+              <th><h6>Type d'habilitation</h6></th>
+              <th><h6>Appli / Outil</h6></th>
+              <th><h6>Lien</h6></th>
+              <th><h6>Lien pour habiliter</h6></th>
+              <th><h6>Notes / Commentaire</h6></th>
+              <th><h6>Actions</h6></th>
             </tr>
           </thead>
 
           <tbody>
-            <tr *ngFor="let poste of postesPagines">
+            <tr *ngFor="let lien of lienHabilitation">
               <td class="min-width">
-                <p>{{ poste.intitule }}</p>
+                <p>{{ lien.typeHabilitation?.type }}</p>
               </td>
 
               <td class="min-width">
                 <p>
-                 {{ poste.employes?.nom }}  {{ poste.employes?.prenom }}
+                 {{ lien.outil }}
                 </p>
               </td>              
               
               <td class="min-width">
                 <p>
-                 {{ poste.pole?.nom }}
+                 {{ lien.lien }}
                 </p>
               </td>
 
               <td class="min-width">
-                <p>{{ poste.pole ? poste.pole?.direction?.service : poste.direction?.service }}</p>
+                <p>{{ lien.urlHabilitation }}</p>
               </td>              
               
               <td class="min-width">
-                <p>{{ poste.responsable?.employes?.nom }} {{ poste.responsable?.employes?.prenom }}</p>
+                <p>{{ lien.description }} </p>
               </td>              
               
-              <td class="min-width">
-                <p>{{ poste.adjoint }} </p>
-              </td>
-
-
-
               <td>
                 <div class="action">
                 
-                  <app-delete (click)="deletePoste(poste)"></app-delete>
+                  <app-delete (click)="deletelien(lien)"></app-delete>
 
-                  <app-see [routerLink]="['/admin/poste', poste.id]"> </app-see>
-                  <app-update [routerLink]="['/admin/poste/update', poste.id]"> </app-update> 
+                  <app-see [routerLink]="['/admin/liens-habilitation', lien.id]"> </app-see>
+                  <app-update [routerLink]="['/admin/liens-habilitation/update', lien.id]"> </app-update> 
                  
                 </div>
               </td>
@@ -100,3 +91,4 @@
 
 </div>
 </div>
+
