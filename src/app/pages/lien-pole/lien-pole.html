@@ -1,56 +1,58 @@
-<app-add routerLink="/admin/direction/new">Ajouter une Direction</app-add>
+<app-add routerLink="/admin/liens-habilitation-pole/new">Ajouter une habilitation</app-add>
 <div class="row">
 
-    <div *ngIf="errorMessage()?.length" class="alert-box danger-alert mt-4">
+    <div *ngIf="errorMessage?.length" class="alert-box danger-alert  mt-4">
       <div class="alert">
         <p class="text-medium">
-          {{ errorMessage() }}
+          {{ errorMessage }}
         </p>
       </div>
     </div>
 
-
-  <div class="col-lg-12" >
+  <div class="col-lg-12">
     <div class="card-style mb-30">
-    
+
       <div class="table-wrapper table-responsive">
         <table class="table">
 
           <thead>
             <tr>
-              <th><h6>Directions</h6></th>
-              <th><h6>responsable</h6></th>
-              <th><h6>Adjoint </h6></th>
+              <th><h6>Direction</h6></th>
+              <th><h6>Pole</h6></th>
+              <th><h6>Resonsable du pole</h6></th>
+              <th><h6>Status</h6></th>
               <th><h6>Actions</h6></th>
             </tr>
           </thead>
 
           <tbody>
-                <tr *ngFor="let direction of directionsPagines">
+            <tr *ngFor="let lien of lienPole">
               <td class="min-width">
-                <p>{{ direction.service }}</p>
+                <p>{{ lien.pole?.direction?.service }}</p>
               </td>
 
               <td class="min-width">
                 <p>
-                 {{ direction.employes?.nom }}  {{ direction.employes?.prenom }}
+                 {{ lien.pole?.nom }}
+                </p>
+              </td>              
+              
+              <td class="min-width">
+                <p>
+                 {{ lien.pole?.employes?.nom }}   {{ lien.pole?.employes?.prenom }}
                 </p>
               </td>
 
-              <td class="min-width">
-                <p>{{ direction.adjoint }}</p>
-              </td>
-
-
-
-              <td class="action"> 
+              
+              <td>
+                <div class="action">
                 
-                  <app-delete (click)="deleteDirection(direction)"></app-delete>
+                  <app-delete (click)="deleteLiens(lien)"></app-delete>
 
-                  <!-- <app-see [routerLink]="['/admin/direction', direction.id]"> </app-see> -->
-                   <app-see [routerLink]="['/admin/liens-habilitation-direction', direction.id]"> </app-see>
-                  <app-update [routerLink]="['/admin/direction/update', direction.id]"> </app-update>
+                  <app-see [routerLink]="['/admin/liens-habilitation-pole', lien.id]"> </app-see>
+                  <app-update [routerLink]="['/admin/liens-habilitation-pole/update', lien.id]"> </app-update> 
                  
+                </div>
               </td>
 
             </tr>
@@ -79,5 +81,6 @@
       </div>
     </div>
 
-  </div>
 </div>
+</div>
+

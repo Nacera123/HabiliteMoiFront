@@ -1,0 +1,25 @@
+<div class="the-details mt-4">
+  <app-return [routerLink]="['/admin/liens-habilitation-poste-pole']"> </app-return>
+    <div>
+        <div>
+            <div>
+                <h4 *ngIf="selectedLien()">{{ selectedLien()?.habilitationPole?.habilitationDirection?.lienHabilitation?.outil }}  </h4>
+            </div>
+            <div class="mt-4">
+                <p *ngIf="selectedLien()"><b>Type d'habilitation:</b> {{ selectedLien()?.habilitationPole?.habilitationDirection?.lienHabilitation?.typeHabilitation?.type }}</p>
+                <p *ngIf="selectedLien()"><b>Appli / Outil :</b> {{ selectedLien()?.habilitationPole?.habilitationDirection?.lienHabilitation?.outil }} </p>
+                <p *ngIf="selectedLien()"><b>Lien :</b> {{ selectedLien()?.habilitationPole?.habilitationDirection?.lienHabilitation?.lien }} </p>
+                <p *ngIf="selectedLien()"><b>Lien pour habiliter :</b> {{ selectedLien()?.habilitationPole?.habilitationDirection?.lienHabilitation?.urlHabilitation }}</p>
+
+                <p *ngIf="selectedLien()"><b>Notes / Commentaire :</b> {{ selectedLien()?.habilitationPole?.habilitationDirection?.lienHabilitation?.description }}  </p>
+                <p *ngIf="selectedLien()"><b>De la direction :</b> {{ selectedLien()?.habilitationPole?.habilitationDirection?.direction?.service }} </p>
+                <p *ngIf="selectedLien()"><b>Dont le responsable :</b> {{ selectedLien()?.habilitationPole?.habilitationDirection?.direction?.employes?.nom}}  {{ selectedLien()?.habilitationPole?.habilitationDirection?.direction?.employes?.prenom }}  </p>
+                <p *ngIf="selectedLien()"><b>Du pôle :</b> {{ selectedLien()?.habilitationPole?.pole?.nom }} </p>
+                <p *ngIf="selectedLien()"><b>Dont le responsable :</b> {{ selectedLien()?.habilitationPole?.pole?.employes?.nom}}  {{ selectedLien()?.habilitationPole?.pole?.employes?.prenom }}  </p>
+                <p *ngIf="selectedLien()"><b>Employé(e) :</b> {{ selectedLien()?.poste?.employes?.nom }}  {{ selectedLien()?.poste?.employes?.prenom }}  </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+

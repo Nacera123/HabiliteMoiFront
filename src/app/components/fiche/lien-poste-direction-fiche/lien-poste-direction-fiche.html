@@ -1,0 +1,23 @@
+<div class="the-details mt-4">
+  <app-return [routerLink]="['/admin/liens-habilitation-poste-direction']"> </app-return>
+    <div>
+        <div>
+            <div>
+                <h4 *ngIf="selectedLien()">{{ selectedLien()?.habilitationDirection?.lienHabilitation?.outil }}  </h4>
+            </div>
+            <div class="mt-4">
+                <p *ngIf="selectedLien()"><b>Type d'habilitation:</b> {{ selectedLien()?.habilitationDirection?.lienHabilitation?.typeHabilitation?.type }}</p>
+                <p *ngIf="selectedLien()"><b>Appli / Outil :</b> {{ selectedLien()?.habilitationDirection?.lienHabilitation?.outil }} </p>
+                <p *ngIf="selectedLien()"><b>Lien :</b> {{ selectedLien()?.habilitationDirection?.lienHabilitation?.lien }} </p>
+                <p *ngIf="selectedLien()"><b>Lien pour habiliter :</b> {{ selectedLien()?.habilitationDirection?.lienHabilitation?.urlHabilitation }}</p>
+
+                <p *ngIf="selectedLien()"><b>Notes / Commentaire :</b> {{ selectedLien()?.habilitationDirection?.lienHabilitation?.description }}  </p>
+                <p *ngIf="selectedLien()"><b>De la direction :</b> {{ selectedLien()?.habilitationDirection?.direction?.service }} </p>
+                <p *ngIf="selectedLien()"><b>Dont le responsable :</b> {{ selectedLien()?.habilitationDirection?.direction?.employes?.nom}}  {{ selectedLien()?.habilitationDirection?.direction?.employes?.prenom }}  </p>
+                <p *ngIf="selectedLien()"><b>Employé(e) :</b> {{ selectedLien()?.poste?.employes?.nom }}  {{ selectedLien()?.poste?.employes?.prenom }}  </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+

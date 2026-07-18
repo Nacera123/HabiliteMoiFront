@@ -26,6 +26,20 @@ import { TypeHabilitationForm } from './components/forms/type-habilitation-form/
 import { Lienhabilitations } from './pages/lienhabilitations/lienhabilitations';
 import { LienHabilitationForm } from './components/forms/lien-habilitation-form/lien-habilitation-form';
 import { LienHabilitationFiche } from './components/fiche/lien-habilitation-fiche/lien-habilitation-fiche';
+import { LienDirection } from './pages/lien-direction/lien-direction';
+import { LienDirectionForm } from './components/forms/lien-direction-form/lien-direction-form';
+import { LienDirectionFiche } from './components/fiche/lien-direction-fiche/lien-direction-fiche';
+import { LienPole } from './pages/lien-pole/lien-pole';
+import { LienPoleForm } from './components/forms/lien-pole-form/lien-pole-form';
+import { LienPoleFiche } from './components/fiche/lien-pole-fiche/lien-pole-fiche';
+import { LienPosteDirection } from './pages/lien-poste-direction/lien-poste-direction';
+import { LienPosteDirectionForm } from './components/forms/lien-poste-direction-form/lien-poste-direction-form';
+import { LienPosteDirectionFiche } from './components/fiche/lien-poste-direction-fiche/lien-poste-direction-fiche';
+import { LienPostePole } from './pages/lien-poste-pole/lien-poste-pole';
+import { LienPostePoleForm } from './components/forms/lien-poste-pole-form/lien-poste-pole-form';
+import { LienPostePoleFiche } from './components/fiche/lien-poste-pole-fiche/lien-poste-pole-fiche';
+import { LienDetailPole } from './pages/lien-detail-pole/lien-detail-pole';
+
 
 
 export const routes: Routes = [
@@ -85,6 +99,38 @@ export const routes: Routes = [
             { path: 'liens-habilitation/new', component: LienHabilitationForm },
             { path: 'liens-habilitation/update/:id', component: LienHabilitationForm },
             { path: 'liens-habilitation/:id', component: LienHabilitationFiche },
+
+
+            //Liens d'habilitation direction
+            { path: 'liens-habilitation-direction/:id', component: LienDirection },
+            // { path: 'liens-habilitation-direction/new', component: LienDirectionForm },
+            // { path: 'liens-habilitation-direction/update/:id', component: LienDirectionForm },
+            // { path: 'liens-habilitation-direction/:id', component: LienDirectionFiche },
+
+            //Liens d'habilitation pole
+            { path: 'liens-habilitation-pole', component: LienPole },
+            { path: 'liens-habilitation-pole/new', component: LienPoleForm },
+            { path: 'liens-habilitation-pole/update/:id', component: LienPoleForm },
+            { path: 'liens-habilitation-pole/:id', component: LienPoleFiche },
+
+            //Liens d'habilitation pole
+            { path: 'liens-habilitation-detail-pole', component: LienDetailPole },
+            // { path: 'liens-habilitation-detail-pole/new', component: LienPoleForm },
+            // { path: 'liens-habilitation-detail-pole/update/:id', component: LienPoleForm },
+            // { path: 'liens-habilitation-detail-pole/:id', component: LienPoleFiche },
+
+
+            //Liens d'habilitation poste direction
+            { path: 'liens-habilitation-poste-direction', component: LienPosteDirection },
+            { path: 'liens-habilitation-poste-direction/new', component: LienPosteDirectionForm },
+            { path: 'liens-habilitation-poste-direction/update/:id', component: LienPosteDirectionForm },
+            { path: 'liens-habilitation-poste-direction/:id', component: LienPosteDirectionFiche },
+
+            //Liens d'habilitation poste pole
+            { path: 'liens-habilitation-poste-pole', component: LienPostePole },
+            { path: 'liens-habilitation-poste-pole/new', component: LienPostePoleForm },
+            { path: 'liens-habilitation-poste-pole/update/:id', component: LienPostePoleForm },
+            { path: 'liens-habilitation-poste-pole/:id', component: LienPostePoleFiche },
 
             //teams
             { path: 'teams', component: Teams },
