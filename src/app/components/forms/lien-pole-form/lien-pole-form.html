@@ -1,0 +1,90 @@
+<div class="form-elements-wrapper">
+    <div class="card-style mb-30">
+
+        <h6 class="mb-25">Gérer les habilitations d'un pole</h6>
+
+        <div *ngIf="errorMessage()?.length" class="alert-box danger-alert pl-100">
+
+          <div class="alert">
+            
+            <p class="text-medium">
+              {{ errorMessage() }}
+            </p>
+          </div>
+        </div>
+
+        <form class="row g-3" [formGroup]="form" (ngSubmit)="create()">
+
+            <div class="input-style-1">
+                <label>Direction</label>
+                <div class="select-position">
+                    <ng-select
+                    class="select-style-2"
+                    [items]="directions"
+                    formControlName="direction"
+                    [compareWith]="compareDirection"
+                    bindLabel="service"
+                    [searchable]="true"
+                    [clearable]="true"
+                    placeholder="Choisir une direction"
+                    (change)="onDirectionChange($event)">
+
+                    <ng-template ng-option-tmp let-item="item">
+                        {{ item.service }}
+                    </ng-template>
+
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="input-style-1">
+                <label>Pole</label>
+                <div class="select-position">
+                    <ng-select
+                    class="select-style-2"
+                    [items]="polesFiltres"
+                    formControlName="pole"
+                    [compareWith]="comparePole"
+                    bindLabel="nom"
+                    [searchable]="true"
+                    [clearable]="true"
+                    placeholder="Choisir un pole"
+                    (change)="onPoleChange($event)">
+
+                    <ng-template ng-option-tmp let-item="item">
+                        {{ item.nom }}
+                    </ng-template>
+
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="input-style-1" *ngIf="habilitationsDirection.length">
+                <label>Habilitations disponibles</label>
+                <div class="checkbox-list">
+                    <div *ngFor="let hd of habilitationsDirection" class="checkbox-item">
+                        <input
+                            type="checkbox"
+                            [id]="'hab-' + hd.id"
+                            [checked]="isChecked(hd.id!)"
+                            (change)="toggleHabilitation(hd.id!, $event.target.checked)"
+                        />
+                        <label [for]="'hab-' + hd.id">{{ hd.lienHabilitation?.outil }}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="errorMessage()">
+                {{ errorMessage() }}
+            </div>
+
+            <div class="col-12 d-flex justify-content-center align-items-center gap-3 mt-4">
+                <app-validate>Enregistrer</app-validate>
+                <app-return-form [routerLink]="['/admin/liens-habilitation-pole']"></app-return-form>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

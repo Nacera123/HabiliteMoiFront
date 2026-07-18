@@ -1,0 +1,98 @@
+<div class="form-elements-wrapper">
+    <div class="card-style mb-30">
+
+        <h6 class="mb-25">  {{ formulaire ? 'Modifier une habilitation' : 'Créer une habilitation' }} </h6>
+
+        <div *ngIf="errorMessage()?.length" class="alert-box danger-alert pl-100">
+
+          <div class="alert">
+            
+            <p class="text-medium">
+              {{ errorMessage() }}
+            </p>
+          </div>
+        </div>
+
+        <form class="row g-3" [formGroup]="form" (ngSubmit)="create()">
+
+            <div class="input-style-1">
+                <label for="outil">Outil</label>
+                <input id="outil" type="text" placeholder="Nom de l'outil ou de l'application" formControlName="outil" />
+            </div>
+
+            <div class="input-style-1">
+                <label for="lien">Lien</label>
+                <input id="lien" type="text" placeholder="lien d'acces a l'application" formControlName="lien" />
+            </div>
+
+            <div class="input-style-1">
+                <label for="urlHabilitation">Lien pour habiliter</label>
+                <input id="urlHabilitation" type="text" placeholder="lien pour habiliter" formControlName="urlHabilitation" />
+            </div>
+
+            <div class="input-style-1">
+                <label for="description">Description</label>
+                <textarea id="description" placeholder="Autres renseignements" formControlName="description"></textarea>
+            </div>
+
+            <div class="input-style-1">
+                <label>Type d'habilitation</label>
+                <div class="select-position">
+                    <ng-select
+                    class="select-style-2"
+                    [items]="typeHabilitationOptions"
+                    formControlName="typeHabilitation"
+                    [compareWith]="compareType"
+                    bindLabel="type"
+                    [searchable]="true"
+                    [clearable]="true"
+                    placeholder="Choisir un type">
+
+                    <ng-template ng-option-tmp let-item="item">
+                        {{ item.type }}
+                    </ng-template>
+
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="input-style-1" *ngIf="form.value.typeHabilitation?.id === NOUVEAU_TYPE">
+                <label>Nouveau type</label>
+                <input type="text" formControlName="nouveauType" placeholder="Nom du nouveau type" />
+            </div>
+
+            <div class="input-style-1">
+                <label>Direction</label>
+                <div class="select-position">
+                    <ng-select
+                    class="select-style-2"
+                    [items]="directions"
+                    formControlName="direction"
+                    [compareWith]="compareDirection"
+                    bindLabel="service"
+                    [searchable]="true"
+                    [clearable]="true"
+                    placeholder="Choisir une direction">
+
+                    <ng-template ng-option-tmp let-item="item">
+                        {{ item.service }}
+                    </ng-template>
+
+                    </ng-select>
+                </div>
+            </div>
+
+            <div *ngIf="errorMessage()">
+                {{ errorMessage() }}
+            </div>
+
+            <div class="col-12 d-flex justify-content-center align-items-center gap-3 mt-4">
+                <app-validate>{{ formulaire?.id ? 'Modifier' : 'Ajouter' }}</app-validate>
+                <app-return-form [routerLink]="['/admin/liens-habilitation-direction']"></app-return-form>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
